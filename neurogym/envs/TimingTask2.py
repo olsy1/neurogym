@@ -3,7 +3,7 @@ import neurogym as ngym
 from neurogym import spaces
 
 
-class TimingTask(ngym.TrialEnv):
+class TimingTask2(ngym.TrialEnv):
     def __init__(self, dt=100, rewards=None, timing=None, sigma=1):
         super().__init__(dt=dt)
         self.sigma = sigma / np.sqrt(self.dt)  # Input noise
