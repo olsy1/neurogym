@@ -26,9 +26,13 @@ class TimingTask2(ngym.TrialEnv):
         self.action_space = spaces.Discrete(2)  # Two possible actions
 
     def _new_trial(self, **kwargs):
+        # Initial trial type selection
+        trial_type = self.rng.choice([1, 2])
+
+        # Setting up the trial dictionary
         trial = {
-            'type': self.rng.choice([1, 2]),  # Type of trial (1 or 2)
-            'correct_action_timing': 3000 if trial['type'] == 1 else 6000  # Correct timing for action
+            'type': trial_type,
+            'correct_action_timing': 3000 if trial_type == 1 else 6000  # Correct timing for action
         }
         trial.update(kwargs)
 
@@ -43,7 +47,7 @@ class TimingTask2(ngym.TrialEnv):
         self.set_groundtruth(trial['correct_action_timing'], 'decision')
 
         return trial
-
+    
     def _step(self, action):
         new_trial = False
         reward = 0
